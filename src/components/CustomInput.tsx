@@ -5,9 +5,12 @@ interface CustomInputProps {
 
 export default function CustomInput({ label, type = "text" }: CustomInputProps) {
   return (
-    <div>
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+    }}>
       <label htmlFor="input">{label}</label>
-      <input name="input" type={type} />
+      <input style={{}} name="input" type={type} />
     </div>
   );
 }
