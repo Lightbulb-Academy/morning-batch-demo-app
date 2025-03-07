@@ -3,17 +3,9 @@ body {
   margin: 0;
 }
 
-.grid-container {
-  display: grid;
-  grid-gap: 5px;
-  grid-auto-flow: column; /* appear Vertically*/
-  justify-items: center;
-}
-
 .card {
   width: 400px;
   height: 160px;
-  /* padding: 8px; */
   border-radius: 8px;
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
   overflow: hidden;
