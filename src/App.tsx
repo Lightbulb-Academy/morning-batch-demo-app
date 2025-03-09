@@ -1,7 +1,16 @@
+import Button from "./components/Button";
 import Card from "./components/Card";
 import CustomInput from "./components/CustomInput";
 
 function App() {
+  const handleAdd = () => {
+    console.log("Add button clicked");
+  }
+
+  const handleClear = () => {
+    console.log("Clear button clicked");
+  }
+
   return (
     <div
       style={{
@@ -34,7 +43,8 @@ function App() {
           <CustomInput label="Title" />
           <CustomInput label="Description" />
         </div>
-        <button>+ Add</button>
+        <Button onClick={handleAdd} label="Add" />
+        <Button onClick={handleClear} label="Clear" />
       </div>
       <div
         style={{
@@ -45,26 +55,14 @@ function App() {
         }}
       >
         <Card
-          color="black"
+          style={{ backgroundColor: "aliceBlue" }}
           title="Card 1"
           description="This is a description of card 1."
         />
         <Card title="Card 2" description="This is a description of card 2." />
-        <Card
-          color="black"
-          title="Card 2"
-          description="This is a description of card 2."
-        />
-        <Card
-          color="black"
-          title="Card 2"
-          description="This is a description of card 2."
-        />
-        <Card
-          color="black"
-          title="Card 2"
-          description="This is a description of card 2."
-        />
+        <Card title="Card 3" description="This is a description of card 2." />
+        <Card title="Card 4" description="This is a description of card 2." />
+        <Card title="Card 5" description="This is a description of card 2." />
       </div>
     </div>
   );
