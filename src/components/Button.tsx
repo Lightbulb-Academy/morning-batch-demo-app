@@ -2,9 +2,10 @@
 interface ButtonProps {
   label: string;
   onClick: () => void;
+  className?: string;
 }
 
-export default function Button({ label, onClick }: ButtonProps) {
+export default function Button({ label, onClick, className }: ButtonProps) {
   return (
     <button
       style={{
@@ -18,6 +19,8 @@ export default function Button({ label, onClick }: ButtonProps) {
         borderRadius: 8,
         fontSize: 16,
       }}
+      className={className}
+
       onClick={onClick}
     >
       {label}

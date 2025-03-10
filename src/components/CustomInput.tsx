@@ -10,7 +10,7 @@ export default function CustomInput({ label, type = "text" }: CustomInputProps) 
       flexDirection: "column",
     }}>
       <label htmlFor="input">{label}</label>
-      <input style={{}} name="input" type={type} />
+      <input placeholder={label} className="border" style={{}} name="input" type={type} />
     </div>
   );
 }

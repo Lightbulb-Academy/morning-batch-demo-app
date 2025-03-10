@@ -1,14 +1,12 @@
 export default function Card({
   title,
   description,
-  style
 }: {
   title: string;
   description: string;
-  style?: object;
 }) {
   return (
-    <div className="card" style={style}>
+    <div className="card">
       <h3 className="card-title">{title}</h3>
       <p className="card-desc">{description}</p>
     </div>
