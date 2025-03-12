@@ -1,7 +1,8 @@
 // props - label, onClick
+// TODO - add type props to button
 interface ButtonProps {
   label: string;
-  onClick: () => void;
+  onClick: (event: any) => void;
   className?: string;
 }
 
