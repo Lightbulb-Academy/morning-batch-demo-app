@@ -1,13 +1,14 @@
 interface CustomInputProps {
   label: string;
   type?: string;
+  placeholder?: string;
 }
 
-export default function CustomInput({ label, type = "text" }: CustomInputProps) {
+export default function CustomInput(props: CustomInputProps) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor="input">{label}</label>
-      <input placeholder={label} className="border px-2 py-1 rounded" name="input" type={type} />
+      <label htmlFor="input">{props.label}</label>
+      <input placeholder={props.placeholder} className="border px-2 py-1 rounded" name="input" type={props.type} />
     </div>
   );
 }

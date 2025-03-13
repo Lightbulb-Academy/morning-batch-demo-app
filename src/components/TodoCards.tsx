@@ -1,6 +1,12 @@
+import { Todo } from "../App";
 import Card from "./Card";
 
-export default function TodoCards() {
+interface TodoCardsProps {
+  todos: Todo[];
+  cardTitle: string;
+}
+
+export default function TodoCards(props: TodoCardsProps) {
   return (
     <div
       className="w-full"
@@ -11,11 +17,9 @@ export default function TodoCards() {
         rowGap: "2rem",
       }}
     >
-      <Card title="Card 1" description="This is a description of card 1." />
-      <Card title="Card 2" description="This is a description of card 2." />
-      <Card title="Card 3" description="This is a description of card 2." />
-      <Card title="Card 4" description="This is a description of card 2." />
-      <Card title="Card 5" description="This is a description of card 2." />
+      {props.todos.map((todo, index) => (
+        <Card key={index} title={todo.title} description={todo.description} />
+      ))}
     </div>
   );
 }

@@ -1,11 +1,17 @@
 import { useState } from "react";
 import Button from "./Button";
+import { Todo } from "../App";
 
-export default function TodoForm({ todos, setTodos }: any) {
+interface TodoFormProps {
+  todos: Todo[];
+  setTodos: (todo: Todo[]) => void;
+}
+
+export default function TodoForm({ todos, setTodos }: TodoFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleAdd = (event: any) => {
+  const handleAdd = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     console.log("Add button clicked");
     const newTodo = {
@@ -18,7 +24,8 @@ export default function TodoForm({ todos, setTodos }: any) {
   };
 
   const handleClear = () => {
-    // TODO - impelement state clear
+    setTitle("");
+    setDescription("")
     console.log("Clear button clicked");
   };
 
@@ -39,8 +46,6 @@ export default function TodoForm({ todos, setTodos }: any) {
         />
 
         <div className="flex items-center justify-center gap-8">
-          {/* TODO - add type props to button */}
-
           <Button onClick={handleAdd} label="Add" />
           <Button
             className="!bg-white !text-black !border"

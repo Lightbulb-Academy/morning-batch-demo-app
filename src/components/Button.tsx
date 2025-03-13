@@ -2,11 +2,12 @@
 // TODO - add type props to button
 interface ButtonProps {
   label: string;
-  onClick: (event: any) => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
+  type?: "submit" | "reset" | "button";
 }
 
-export default function Button({ label, onClick, className }: ButtonProps) {
+export default function Button({ label, onClick, className, type = "button" }: ButtonProps) {
   return (
     <button
       style={{
@@ -21,7 +22,7 @@ export default function Button({ label, onClick, className }: ButtonProps) {
         fontSize: 16,
       }}
       className={className}
-
+      type={type}
       onClick={onClick}
     >
       {label}
