@@ -1,15 +1,26 @@
-export default function Card({
-  title,
-  description,
-  status = false
-}: {
+interface CardProps {
   title: string;
   description: string;
   status?: boolean;
-}) {
+  cardIndex: number;
+  handleDelete: () => void;
+}
+
+export default function Card({
+  title,
+  description,
+  status = false,
+  handleDelete
+}: CardProps) {
+
   return (
     <div className={`card ${status ? "line-through " : ""}`}>
-      <h3 className="card-title">{title}</h3>
+      <div className="card-title flex justify-between items-center">
+        <h3>{title}</h3>
+        <button className="cursor-pointer" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
       <p className="card-desc">{description}</p>
     </div>
   );

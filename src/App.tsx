@@ -20,7 +20,7 @@ function App() {
     <div className="flex flex-col w-screen h-screen items-center gap-8 p-4">
       <h1 className="text-2xl font-bold">TODO App</h1>
       <TodoForm todos={todos} setTodos={setTodos} />
-      <TodoCards todos={todos} />
+      <TodoCards todos={todos} setTodos={setTodos} />
     </div>
   );
 }
