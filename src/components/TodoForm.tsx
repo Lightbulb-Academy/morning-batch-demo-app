@@ -18,7 +18,10 @@ export default function TodoForm({ todos, setTodos }: TodoFormProps) {
       title,
       description,
     };
-    setTodos([...todos, newTodo]);
+    const updatedTodos = [...todos, newTodo];
+    // save to localStorage
+    localStorage.setItem("todos", JSON.stringify(updatedTodos)); // JSON.stringify converts JS object to string
+    setTodos(updatedTodos);
     setTitle("");
     setDescription("");
   };

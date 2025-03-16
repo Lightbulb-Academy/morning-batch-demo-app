@@ -8,7 +8,13 @@ export interface Todo {
 }
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  // get todos from localStorage
+  const todosFromLocalStorage = localStorage.getItem("todos");
+  // if todosFromLocalStorage is null, set initialTodos to an empty array
+  const initialTodos = todosFromLocalStorage
+    ? JSON.parse(todosFromLocalStorage) // JSON.parse converts string to JS object
+    : [];
+  const [todos, setTodos] = useState<Todo[]>(initialTodos);
 
   return (
     <div className="flex flex-col w-screen h-screen items-center gap-8 p-4">
