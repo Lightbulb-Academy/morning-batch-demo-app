@@ -9,14 +9,12 @@ export interface Todo {
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const cardTitle = "Cards";
 
   return (
     <div className="flex flex-col w-screen h-screen items-center gap-8 p-4">
       <h1 className="text-2xl font-bold">TODO App</h1>
       <TodoForm todos={todos} setTodos={setTodos} />
-      {/* TODO: Pass todos as props to TodoCards */}
-      <TodoCards cardTitle={cardTitle} todos={todos} />
+      <TodoCards todos={todos} />
     </div>
   );
 }

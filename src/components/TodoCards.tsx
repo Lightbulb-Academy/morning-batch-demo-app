@@ -3,7 +3,6 @@ import Card from "./Card";
 
 interface TodoCardsProps {
   todos: Todo[];
-  cardTitle: string;
 }
 
 export default function TodoCards(props: TodoCardsProps) {

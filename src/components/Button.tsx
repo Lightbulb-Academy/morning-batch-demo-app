@@ -1,5 +1,3 @@
-// props - label, onClick
-// TODO - add type props to button
 interface ButtonProps {
   label: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
