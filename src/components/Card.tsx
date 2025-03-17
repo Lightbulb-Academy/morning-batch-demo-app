@@ -2,24 +2,27 @@ interface CardProps {
   title: string;
   description: string;
   status?: boolean;
-  cardIndex: number;
   handleDelete: () => void;
+  handleEdit: () => void;
 }
 
 export default function Card({
   title,
   description,
   status = false,
-  handleDelete
+  handleDelete,
+  handleEdit
 }: CardProps) {
-
   return (
     <div className={`card ${status ? "line-through " : ""}`}>
       <div className="card-title flex justify-between items-center">
         <h3>{title}</h3>
-        <button className="cursor-pointer" onClick={handleDelete}>
-          Delete
-        </button>
+        <div className="flex gap-2">
+          <button className="cursor-pointer" onClick={handleEdit}>Edit</button>
+          <button className="cursor-pointer" onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
       </div>
       <p className="card-desc">{description}</p>
     </div>

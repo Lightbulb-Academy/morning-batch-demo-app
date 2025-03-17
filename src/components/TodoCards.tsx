@@ -4,16 +4,19 @@ import Card from "./Card";
 interface TodoCardsProps {
   todos: Todo[];
   setTodos: (todo: Todo[]) => void;
+  setSelectedTodo: (todo: Todo | null) => void;
 }
 
 export default function TodoCards(props: TodoCardsProps) {
   const handleDelete = (index: number) => {
-    console.log("Delete button clicked", index);
     const updatedTodos = props.todos.filter((_, i) => i !== index); // DELETE: filter out the selected todo
     localStorage.setItem("todos", JSON.stringify(updatedTodos)); // update localStorage
     props.setTodos(updatedTodos); // update state
-    console.log(updatedTodos);
-  }
+  };
+
+  const handleEdit = (todo: Todo, index: number) => {
+    props.setSelectedTodo({...todo, index });
+  };
 
   // TODO: Edit Todos
 
@@ -28,7 +31,13 @@ export default function TodoCards(props: TodoCardsProps) {
       }}
     >
       {props.todos.map((todo, index) => (
-        <Card key={index} handleDelete={() => handleDelete(index)} cardIndex={index} title={todo.title} description={todo.description} />
+        <Card
+          key={index}
+          handleEdit={() => handleEdit(todo, index)}
+          handleDelete={() => handleDelete(index)}
+          title={todo.title}
+          description={todo.description}
+        />
       ))}
     </div>
   );

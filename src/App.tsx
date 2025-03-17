@@ -5,6 +5,7 @@ import TodoForm from "./components/TodoForm";
 export interface Todo {
   title: string;
   description: string;
+  index?: number;
 }
 
 function App() {
@@ -15,12 +16,13 @@ function App() {
     ? JSON.parse(todosFromLocalStorage) // JSON.parse converts string to JS object
     : [];
   const [todos, setTodos] = useState<Todo[]>(initialTodos);
+  const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
   return (
     <div className="flex flex-col w-screen h-screen items-center gap-8 p-4">
       <h1 className="text-2xl font-bold">TODO App</h1>
-      <TodoForm todos={todos} setTodos={setTodos} />
-      <TodoCards todos={todos} setTodos={setTodos} />
+      <TodoForm setSelectedTodo={setSelectedTodo} selectedTodo={selectedTodo} todos={todos} setTodos={setTodos} />
+      <TodoCards setSelectedTodo={setSelectedTodo} todos={todos} setTodos={setTodos} />
     </div>
   );
 }

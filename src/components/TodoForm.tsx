@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 import { Todo } from "../App";
 
 interface TodoFormProps {
   todos: Todo[];
   setTodos: (todo: Todo[]) => void;
+  selectedTodo: Todo | null;
+  setSelectedTodo: (todo: Todo | null) => void;
 }
 
-export default function TodoForm({ todos, setTodos }: TodoFormProps) {
+export default function TodoForm({
+  todos,
+  setTodos,
+  selectedTodo,
+  setSelectedTodo,
+}: TodoFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -22,15 +29,42 @@ export default function TodoForm({ todos, setTodos }: TodoFormProps) {
     // save to localStorage
     localStorage.setItem("todos", JSON.stringify(updatedTodos)); // JSON.stringify converts JS object to string
     setTodos(updatedTodos);
-    setTitle("");
-    setDescription("");
+    handleClear();
   };
+
+  const handleUpdate = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (!selectedTodo) return;
+    const updatedTodos = [...todos];
+    // replace updated value with the selectedTodo's value in the updatedTodos array
+    updatedTodos[selectedTodo.index!] = {
+      title,
+      description,
+    }
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    handleClear();
+  }
 
   const handleClear = () => {
     setTitle("");
-    setDescription("")
+    setDescription("");
     console.log("Clear button clicked");
+    // set selectedTodo to null
+    setSelectedTodo(null);
   };
+
+  // we usually use useEffect to perform API calls, subscriptions, or DOM manipulations
+  useEffect(() => {
+    console.log("useEffect called");
+  }, []); // runs only once when the component is mounted
+
+  useEffect(() => {
+    if (selectedTodo) {
+      setTitle(selectedTodo.title);
+      setDescription(selectedTodo.description);
+    }
+  }, [selectedTodo]); // runs when selectedTodo changes
 
   return (
     <form className="w-[600px] items-center">
@@ -49,7 +83,12 @@ export default function TodoForm({ todos, setTodos }: TodoFormProps) {
         />
 
         <div className="flex items-center justify-center gap-8">
-          <Button onClick={handleAdd} label="Add" />
+          <Button
+            onClick={(event) =>
+              selectedTodo ? handleUpdate(event) : handleAdd(event)
+            }
+            label={selectedTodo ? "Update" : "Add"}
+          />
           <Button
             className="!bg-white !text-black !border"
             onClick={handleClear}
