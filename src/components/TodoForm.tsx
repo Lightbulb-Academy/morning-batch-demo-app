@@ -67,7 +67,7 @@ export default function TodoForm({
   }, [selectedTodo]); // runs when selectedTodo changes
 
   return (
-    <form className="w-[600px] items-center">
+    <form className="w-[800px] items-center">
       <div className="flex flex-col border gap-4 p-4">
         <input
           value={title}

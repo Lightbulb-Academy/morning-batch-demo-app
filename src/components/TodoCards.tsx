@@ -18,16 +18,14 @@ export default function TodoCards(props: TodoCardsProps) {
     props.setSelectedTodo({...todo, index });
   };
 
-  // TODO: Edit Todos
-
   return (
     <div
-      className="w-full"
+      className="w-full h-full overflow-y-auto pb-16"
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
         justifyItems: "center",
-        rowGap: "2rem",
+        rowGap: "1rem",
       }}
     >
       {props.todos.map((todo, index) => (

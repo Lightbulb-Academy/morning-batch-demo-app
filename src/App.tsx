@@ -19,10 +19,21 @@ function App() {
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
 
   return (
-    <div className="flex flex-col w-screen h-screen items-center gap-8 p-4">
+    <div className="flex flex-col w-screen h-screen overflow-hidden items-center gap-8 p-4">
       <h1 className="text-2xl font-bold">TODO App</h1>
-      <TodoForm setSelectedTodo={setSelectedTodo} selectedTodo={selectedTodo} todos={todos} setTodos={setTodos} />
-      <TodoCards setSelectedTodo={setSelectedTodo} todos={todos} setTodos={setTodos} />
+      <div className="flex gap-8 h-full w-full p-4">
+        <TodoForm
+          setSelectedTodo={setSelectedTodo}
+          selectedTodo={selectedTodo}
+          todos={todos}
+          setTodos={setTodos}
+        />
+          <TodoCards
+            setSelectedTodo={setSelectedTodo}
+            todos={todos}
+            setTodos={setTodos}
+          />
+      </div>
     </div>
   );
 }
