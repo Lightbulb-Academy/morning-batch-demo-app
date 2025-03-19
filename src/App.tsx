@@ -28,11 +28,12 @@ function App() {
           todos={todos}
           setTodos={setTodos}
         />
-          <TodoCards
-            setSelectedTodo={setSelectedTodo}
-            todos={todos}
-            setTodos={setTodos}
-          />
+        <TodoCards
+          selectedTodo={selectedTodo}
+          setSelectedTodo={setSelectedTodo}
+          todos={todos}
+          setTodos={setTodos}
+        />
       </div>
     </div>
   );

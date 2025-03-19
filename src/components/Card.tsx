@@ -4,6 +4,7 @@ interface CardProps {
   status?: boolean;
   handleDelete: () => void;
   handleEdit: () => void;
+  isSelected: boolean;
 }
 
 export default function Card({
@@ -11,14 +12,22 @@ export default function Card({
   description,
   status = false,
   handleDelete,
-  handleEdit
+  handleEdit,
+  isSelected,
 }: CardProps) {
+  console.log({ isSelected, status });
   return (
-    <div className={`card ${status ? "line-through " : ""}`}>
+    <div
+      className={`card ${status ? "line-through " : ""} ${
+        isSelected ? "border-2 border-amber-300" : ""
+      }`}
+    >
       <div className="card-title flex justify-between items-center">
         <h3>{title}</h3>
         <div className="flex gap-2">
-          <button className="cursor-pointer" onClick={handleEdit}>Edit</button>
+          <button className="cursor-pointer" onClick={handleEdit}>
+            Edit
+          </button>
           <button className="cursor-pointer" onClick={handleDelete}>
             Delete
           </button>

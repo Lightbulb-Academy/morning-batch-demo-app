@@ -5,6 +5,7 @@ interface TodoCardsProps {
   todos: Todo[];
   setTodos: (todo: Todo[]) => void;
   setSelectedTodo: (todo: Todo | null) => void;
+  selectedTodo: Todo | null;
 }
 
 export default function TodoCards(props: TodoCardsProps) {
@@ -15,7 +16,7 @@ export default function TodoCards(props: TodoCardsProps) {
   };
 
   const handleEdit = (todo: Todo, index: number) => {
-    props.setSelectedTodo({...todo, index });
+    props.setSelectedTodo({ ...todo, index });
   };
 
   return (
@@ -35,6 +36,7 @@ export default function TodoCards(props: TodoCardsProps) {
           handleDelete={() => handleDelete(index)}
           title={todo.title}
           description={todo.description}
+          isSelected={props.selectedTodo?.index === index}
         />
       ))}
     </div>
