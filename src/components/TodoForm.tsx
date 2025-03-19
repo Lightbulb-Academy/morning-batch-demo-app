@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Button from "./Button";
-import { Todo } from "../App";
+import { Todo } from "../pages/TodoApp";
 
 interface TodoFormProps {
   todos: Todo[];
@@ -40,11 +40,11 @@ export default function TodoForm({
     updatedTodos[selectedTodo.index!] = {
       title,
       description,
-    }
+    };
     setTodos(updatedTodos);
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
     handleClear();
-  }
+  };
 
   const handleClear = () => {
     setTitle("");
