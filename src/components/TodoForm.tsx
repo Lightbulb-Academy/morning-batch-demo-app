@@ -20,7 +20,6 @@ export default function TodoForm({
 
   const handleAdd = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log("Add button clicked");
     const newTodo = {
       title,
       description,
@@ -49,7 +48,6 @@ export default function TodoForm({
   const handleClear = () => {
     setTitle("");
     setDescription("");
-    console.log("Clear button clicked");
     // set selectedTodo to null
     setSelectedTodo(null);
   };
@@ -60,6 +58,7 @@ export default function TodoForm({
   }, []); // runs only once when the component is mounted
 
   useEffect(() => {
+    console.log("selectedTodo changed");
     if (selectedTodo) {
       setTitle(selectedTodo.title);
       setDescription(selectedTodo.description);

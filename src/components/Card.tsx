@@ -15,7 +15,6 @@ export default function Card({
   handleEdit,
   isSelected,
 }: CardProps) {
-  console.log({ isSelected, status });
   return (
     <div
       className={`card ${status ? "line-through " : ""} ${
