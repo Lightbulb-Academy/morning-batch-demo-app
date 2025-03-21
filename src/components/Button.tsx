@@ -1,11 +1,16 @@
-interface ButtonProps {
+interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   label: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
   type?: "submit" | "reset" | "button";
 }
 
-export default function Button({ label, onClick, className, type = "button" }: ButtonProps) {
+export default function Button({
+  label,
+  onClick,
+  className,
+  type = "button",
+}: ButtonProps) {
   return (
     <button
       style={{

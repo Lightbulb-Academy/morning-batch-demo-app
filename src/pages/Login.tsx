@@ -16,7 +16,13 @@ export default function Login() {
 
   const handleAPICallWithAxios = async () => {
     try {
-      const response = await axios("http://localhost:3000/todos");
+      const response = await axios("http://localhost:8000/todos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -25,12 +31,12 @@ export default function Login() {
 
   useEffect(() => {
     console.log("Page loaded");
-    handleAPICall();
+    // handleAPICall();
     handleAPICallWithAxios();
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="card flex flex-col items-center">
       <h1>Login</h1>
       <NavLink className="text-blue-400" to="/register">
         Register
