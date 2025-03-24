@@ -1,13 +1,14 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import CustomInput from "../components/CustomInput";
 import Button from "../components/Button";
 import { useActionState, useEffect } from "react";
 import axios from "axios";
 
-const RegisterAction = async (_previousData: any, formData: any) => {
+const RegisterAction = async (_previousData: null, formData: FormData) => {
   try {
     const fde = formData.entries();
     const payload = Object.fromEntries(fde);
+
     const response = await axios("http://localhost:8000/auth/register", {
       method: "POST",
       headers: {
@@ -15,7 +16,7 @@ const RegisterAction = async (_previousData: any, formData: any) => {
       },
       data: payload,
     });
-    return response;
+    return response.data;
   } catch (error) {
     console.error(error);
     return error;
@@ -23,14 +24,15 @@ const RegisterAction = async (_previousData: any, formData: any) => {
 };
 
 export default function Register() {
-  const [data, submitAction, isLoading] = useActionState(RegisterAction, {});
-  console.log(data);
+  const [data, submitAction, isLoading] = useActionState(RegisterAction, null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (data?.data && data?.data?.token) {
-      localStorage.setItem("token", data.data.token);
+    if (data?.token) {
+      localStorage.setItem("token", data.token);
+      navigate("/");
     }
-  }, [data]);
+  }, [data, navigate]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
