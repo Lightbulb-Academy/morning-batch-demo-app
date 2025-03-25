@@ -1,10 +1,16 @@
 import { NavLink, useNavigate } from "react-router";
 import CustomInput from "../components/CustomInput";
 import Button from "../components/Button";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import axios from "axios";
+import { CircleAlert } from "lucide-react";
 
-const RegisterAction = async (_previousData: null, formData: FormData) => {
+interface State {
+  token?: string | null;
+  error?: string | null;
+}
+
+const RegisterAction = async (_previousData: State, formData: FormData) => {
   try {
     const fde = formData.entries();
     const payload = Object.fromEntries(fde);
@@ -16,15 +22,26 @@ const RegisterAction = async (_previousData: null, formData: FormData) => {
       },
       data: payload,
     });
-    return response.data;
+    return { token: response.data.token };
   } catch (error) {
-    console.error(error);
-    return error;
+    // @ts-ignore
+    return {
+      error:
+        error?.response?.data.message ||
+        "Something went wrong! Please try again later.",
+    };
   }
 };
 
 export default function Register() {
-  const [data, submitAction, isLoading] = useActionState(RegisterAction, null);
+  const [data, submitAction, isLoading] = useActionState<State, FormData>(
+    RegisterAction,
+    {
+      token: null,
+      error: null,
+    }
+  );
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,17 +49,32 @@ export default function Register() {
       localStorage.setItem("token", data.token);
       navigate("/");
     }
+
+    if (data.error) {
+      setError(data.error);
+    }
   }, [data, navigate]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="card flex flex-col items-center py-4 px-8 !h-auto gap-8">
         <h1 className="text-xl font-bold">Register</h1>
+        {error ? (
+          <div className="w-full flex items-center gap-2 border border-red-500 p-2 rounded-md">
+            <CircleAlert size={16} color="red" />
+            <p className="text-red-400">{error}</p>
+          </div>
+        ) : null}
         <form action={submitAction} className="flex flex-col gap-2 w-full">
-          <CustomInput name="name" label="Name" type="text" />
-          <CustomInput name="email" label="Email" type="email" />
-          <CustomInput name="mobile" label="Phone" type="tel" />
-          <CustomInput name="password" label="Password" type="password" />
+          <CustomInput required name="name" label="Name" type="text" />
+          <CustomInput required name="email" label="Email" type="email" />
+          <CustomInput required name="mobile" label="Phone" type="tel" />
+          <CustomInput
+            required
+            name="password"
+            label="Password"
+            type="password"
+          />
           <Button
             type="submit"
             label={isLoading ? "Registering..." : "Register"}

@@ -10,8 +10,7 @@ export default function CustomInput(props: CustomInputProps) {
       <input
         placeholder={`Enter ${props.name}`}
         className="border px-2 py-1 rounded"
-        name={props.name}
-        type={props.type}
+        {...props}
       />
     </div>
   );
