@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router";
 import CustomInput from "../components/CustomInput";
 import Button from "../components/Button";
 import { useActionState, useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { CircleAlert } from "lucide-react";
 
 interface State {
@@ -23,8 +23,7 @@ const RegisterAction = async (_previousData: State, formData: FormData) => {
       data: payload,
     });
     return { token: response.data.token };
-  } catch (error) {
-    // @ts-ignore
+  } catch (error: any) {
     return {
       error:
         error?.response?.data.message ||
