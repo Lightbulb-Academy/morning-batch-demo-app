@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router";
 import CustomInput from "../components/CustomInput";
 import Button from "../components/Button";
 import { useActionState, useEffect, useState } from "react";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 import { CircleAlert } from "lucide-react";
 
 interface State {
@@ -33,10 +33,11 @@ const RegisterAction = async (_previousData: State, formData: FormData) => {
 };
 
 export default function Register() {
+  const token = localStorage.getItem("token") || null;
   const [data, submitAction, isLoading] = useActionState<State, FormData>(
     RegisterAction,
     {
-      token: null,
+      token: token,
       error: null,
     }
   );
@@ -75,13 +76,17 @@ export default function Register() {
             type="password"
           />
           <Button
+            className="mt-4 !w-full"
             type="submit"
             label={isLoading ? "Registering..." : "Register"}
           />
         </form>
-        <NavLink className="text-blue-400" to="/login">
-          Login
-        </NavLink>
+        <p>
+          Already have an account?
+          <NavLink className="text-blue-400 ml-2" to="/login">
+            Login
+          </NavLink>
+        </p>
       </div>
     </div>
   );
