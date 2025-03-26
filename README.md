@@ -14,3 +14,11 @@
 8. Icons - [Link](https://lucide.dev/guide/packages/lucide-react)
 9. Axios - [Link](https://axios-http.com/docs/intro)
 10. useActionState - [Link](https://react.dev/reference/react/useActionState)
+11. API Methods
+
+### API Methods
+
+- To fetch data: GET
+- To post data/form: POST
+- To update data: PATCH/PUT
+- To delete data: DELETE

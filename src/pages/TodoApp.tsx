@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoCards from "../components/TodoCards";
 import TodoForm from "../components/TodoForm";
+import axios from "axios";
 
 export interface Todo {
   title: string;
@@ -11,12 +12,33 @@ export interface Todo {
 function TodoApp() {
   // get todos from localStorage
   const todosFromLocalStorage = localStorage.getItem("todos");
+  const token = localStorage.getItem("token");
   // if todosFromLocalStorage is null, set initialTodos to an empty array
-  const initialTodos = todosFromLocalStorage
-    ? JSON.parse(todosFromLocalStorage) // JSON.parse converts string to JS object
-    : [];
-  const [todos, setTodos] = useState<Todo[]>(initialTodos);
+  // const initialTodos = todosFromLocalStorage
+  //   ? JSON.parse(todosFromLocalStorage) // JSON.parse converts string to JS object
+  //   : [];
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
+
+  const fetchTodos = async () => {
+    try {
+      const response = await axios("http://localhost:8000/todos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = response.data;
+      setTodos(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
 
   return (
     <div className="flex flex-col w-screen h-screen overflow-hidden items-center gap-8 p-4">
