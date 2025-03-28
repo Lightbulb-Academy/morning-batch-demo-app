@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TodoCards from "../components/TodoCards";
 import TodoForm from "../components/TodoForm";
 import axios from "axios";
+import Button from "../components/Button";
+import { ThemeContext } from "../context/ThemeContext";
 
 export interface Todo {
   title: string;
@@ -11,14 +13,11 @@ export interface Todo {
 
 function TodoApp() {
   // get todos from localStorage
-  const todosFromLocalStorage = localStorage.getItem("todos");
   const token = localStorage.getItem("token");
-  // if todosFromLocalStorage is null, set initialTodos to an empty array
-  // const initialTodos = todosFromLocalStorage
-  //   ? JSON.parse(todosFromLocalStorage) // JSON.parse converts string to JS object
-  //   : [];
   const [todos, setTodos] = useState<Todo[]>([]);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
+
+  const { toggleTheme } = useContext(ThemeContext);
 
   const fetchTodos = async () => {
     try {
@@ -43,6 +42,11 @@ function TodoApp() {
   return (
     <div className="flex flex-col w-screen h-screen overflow-hidden items-center gap-8 p-4">
       <h1 className="text-2xl font-bold">TODO App</h1>
+      <Button
+        className="absolute right-4 top-4"
+        onClick={toggleTheme}
+        label="Toggle Theme"
+      />
       <div className="flex gap-8 h-full w-full p-4">
         <TodoForm
           setSelectedTodo={setSelectedTodo}

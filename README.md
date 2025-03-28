@@ -15,6 +15,8 @@
 9. Axios - [Link](https://axios-http.com/docs/intro)
 10. useActionState - [Link](https://react.dev/reference/react/useActionState)
 11. API Methods
+12. Error Handling - try...catch
+13. Context API - [Link](https://react.dev/reference/react/createContext)
 
 ### API Methods
 

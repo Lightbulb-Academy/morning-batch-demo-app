@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   label: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -11,10 +14,12 @@ export default function Button({
   className,
   type = "button",
 }: ButtonProps) {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <button
       style={{
-        backgroundColor: "black",
+        backgroundColor: `${theme === "dark" ? "#333" : "#007bff"}`,
         color: "white",
         border: "none",
         width: 120,
