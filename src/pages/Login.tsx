@@ -47,6 +47,7 @@ export default function Register() {
 
   useEffect(() => {
     if (data?.token) {
+      console.log("data", data.token);
       localStorage.setItem("token", data.token);
       navigate("/");
     }
