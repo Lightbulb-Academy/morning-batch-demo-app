@@ -1,10 +1,11 @@
-import { Routes, Route, Navigate, Outlet } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import TodoApp from "./pages/TodoApp";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useContext } from "react";
 import { ThemeContext } from "./context/ThemeContext";
 import { jwtDecode } from "jwt-decode";
+import AppLayout from "./layout/appLayout";
 
 interface DecodedToken {
   exp: number;
@@ -27,7 +28,7 @@ export default function App() {
         return <Navigate to="/login" />;
       }
     }
-    return token ? <Outlet /> : <Navigate to="/login" />;
+    return token ? <AppLayout /> : <Navigate to="/login" />;
   };
 
   return (

@@ -35,7 +35,7 @@ export default function TodoCards(props: TodoCardsProps) {
       className="w-full h-full overflow-y-auto pb-16"
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         justifyItems: "center",
         rowGap: "1rem",
       }}
@@ -45,6 +45,8 @@ export default function TodoCards(props: TodoCardsProps) {
           key={index}
           handleEdit={() => handleEdit(todo, index)}
           handleDelete={() => handleDelete(todo.id)}
+          id={todo.id}
+          status={todo.status}
           title={todo.title}
           description={todo.description}
           isSelected={props.selectedTodo?.index === index}
