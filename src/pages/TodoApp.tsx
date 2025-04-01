@@ -11,6 +11,8 @@ export interface Todo {
   title: string;
   description: string;
   index?: number;
+  id: number;
+  status?: boolean;
 }
 
 interface UserInfo {

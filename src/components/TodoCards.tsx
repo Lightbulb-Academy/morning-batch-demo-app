@@ -1,5 +1,6 @@
-import { Todo } from "../App";
+import axios from "axios";
 import Card from "./Card";
+import { Todo } from "../pages/TodoApp";
 
 interface TodoCardsProps {
   todos: Todo[];
@@ -9,10 +10,20 @@ interface TodoCardsProps {
 }
 
 export default function TodoCards(props: TodoCardsProps) {
-  const handleDelete = (index: number) => {
-    const updatedTodos = props.todos.filter((_, i) => i !== index); // DELETE: filter out the selected todo
-    localStorage.setItem("todos", JSON.stringify(updatedTodos)); // update localStorage
-    props.setTodos(updatedTodos); // update state
+  const handleDelete = async (id: number) => {
+    try {
+      await axios.delete(`http://localhost:8000/todos/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const updatedTodos = props.todos.filter((todo) => todo.id !== id); // DELETE: filter out the selected todo
+      localStorage.setItem("todos", JSON.stringify(updatedTodos)); // update localStorage
+      props.setTodos(updatedTodos); // update state
+    } catch (error) {
+      console.error("Error deleting todo:", error);
+    }
   };
 
   const handleEdit = (todo: Todo, index: number) => {
@@ -33,7 +44,7 @@ export default function TodoCards(props: TodoCardsProps) {
         <Card
           key={index}
           handleEdit={() => handleEdit(todo, index)}
-          handleDelete={() => handleDelete(index)}
+          handleDelete={() => handleDelete(todo.id)}
           title={todo.title}
           description={todo.description}
           isSelected={props.selectedTodo?.index === index}
