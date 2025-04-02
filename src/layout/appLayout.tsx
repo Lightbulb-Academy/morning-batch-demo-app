@@ -51,7 +51,9 @@ export default function AppLayout() {
       </nav>
       {/* <div className="flex w-full h-full"> */}
       {/* <aside className="h-full w-[600px] bg-amber-200">Sidebar</aside> */}
-      <Outlet />
+      <div className="w-[600px] mx-auto">
+        <Outlet />
+      </div>
       {/* </div> */}
     </div>
   );

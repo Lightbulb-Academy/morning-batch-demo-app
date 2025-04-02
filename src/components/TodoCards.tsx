@@ -32,13 +32,13 @@ export default function TodoCards(props: TodoCardsProps) {
 
   return (
     <div
-      className="w-full h-full overflow-y-auto pb-16"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        justifyItems: "center",
-        rowGap: "1rem",
-      }}
+      className="w-full h-full overflow-y-auto pb-16 flex flex-col gap-4"
+      // style={{
+      //   display: "grid",
+      //   gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+      //   justifyItems: "center",
+      //   rowGap: "1rem",
+      // }}
     >
       {props.todos.map((todo, index) => (
         <Card

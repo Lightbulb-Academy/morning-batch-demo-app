@@ -38,7 +38,7 @@ function TodoApp() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-8 h-full w-full p-8">
+    <div className="flex flex-col items-center gap-8 h-full w-full mt-8">
       <TodoForm
         setSelectedTodo={setSelectedTodo}
         selectedTodo={selectedTodo}
