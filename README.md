@@ -17,6 +17,7 @@
 11. API Methods
 12. Error Handling - try...catch
 13. Context API - [Link](https://react.dev/reference/react/createContext)
+14. Redux Toolkit - [Link](https://redux-toolkit.js.org/tutorials/typescript)
 
 ### API Methods
 
